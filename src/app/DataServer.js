@@ -16,11 +16,11 @@ export default class DataServer {
     this.app      = express();
     this.conn     = null;
     this.root     = __dirname;
-    this.port     = 44500;
+    this.port     = 55960;
     this.server   = http.createServer(this.app);
     this.session  = {};
     this.express  = express;
-    
+
     if(argv.indexOf("-e") != -1) { this.env = argv[(argv.indexOf("-e") + 1)]; }
     if(argv.indexOf("-p") != -1) { this.port = argv[(argv.indexOf("-p") + 1)]; }
 
@@ -31,7 +31,7 @@ export default class DataServer {
   start() {
     this.app.set('port', this.port);
     this.io = socketio.listen(this.server);
-    
+
     let dir = this.fs.readdirSync(this.root+'/extensions/');
     let index = 0;
 
@@ -40,7 +40,7 @@ export default class DataServer {
   			require('./extensions/' + dir[index])(this);
   		}
   	}
-    
+
     this.server.listen(this.app.get('port'), () => {
       this.logger.info('DataServer listening on port '+this.app.get('port')+' in '+this.env+' mode');
     });

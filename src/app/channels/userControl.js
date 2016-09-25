@@ -7,7 +7,6 @@ export default (server, session) => {
     let user = data.user;
     let characters = [];
     server.logger.info('Getting characters for user: ');
-  
   });
 
 };
